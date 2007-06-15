@@ -1,0 +1,58 @@
+Changes in 0.3-x releases of scatterplot3d:
+=======
+ 0.3.0:  New design: box, pretty() for ticks, ...
+ 0.3.1:  par("las") bug patched, scale.y is changed (code and default)
+ 0.3.2:  all angles will work again (default: 40)
+         tick mark labeling changed (using mtext)
+         par("mar") is set in the first line, not very general!
+ 0.3.3:  new argument "mar", more details in the help files
+ 0.3.4:  new arguments x/y/z.ticklabs, thanks to Ben Bolker!
+         bug fix: adj for tick.mark.labels corrected
+ 0.3-5:  new argument y.margin.add for manual fixing scaling problems
+         (e.g. some y-tickmarks dissapear after rescaling the window)
+ 0.3-6:  cex.symbols introduced to solve magnification errors
+ 0.3-7:  added function plane3d, which will be returned,
+         (e.g. for overlaying a regression plane)
+ 0.3-8:  bugfix: some magnification errors for y.ticklabs
+ 0.3-9:  bugfix: pch works vectorized again (error with y-sorting)
+ 0.3-10: added function box3d(), which will be returned,
+         to draw the box surrounding the plot again after additions
+         * added a function s3d.persp() - somehow joining s3d and persp() *
+ 0.3-11: * s3d.persp() deleted again, because of various reasons *
+         Created this file to reduce the size of the R code.
+ 0.3-12: bug fix: tick.mark.labels of y axis were sometimes raised
+         by a constant or vice versa
+         format() is used to print tick.mark.labels pretty, and smarter
+         calculation of desired (for y axis tick.mark.labels) plot margins
+ 0.3-13: typos in help file
+         box3d() refreshes the right lines for an arbitrary angle now.
+         calculation of space for tick.mark.labels fixed
+         (bug was introduced with 0.3-12 ?)
+         Extending s3d requires to set par(mar) to those settings
+          s3d was generated with, which will be done for points3d(),
+          plane3d(), and box3d() automatically.
+          A "Note" has been added to the help file.
+ 0.3-14: Reference changed in help file.
+         Suggestions by Martin Maechler (thank you!):
+         - clean up a lot of code
+         - Added note on unfixed bug to help file.
+	 - Added Martin's great examples 6 a/b: "color cube"
+ 0.3-15: Allow for just 1 point (was 2 before) to be plotted
+         Allow all points to be within a major plane
+	 Argument lty.hide introduced (for plotting of in-visible edges)
+	 plane3d() allows to plot the box-intersecting lines in a 
+          different line style
+ 0.3-16: bug fix: non-finite or NA values of y did not work.
+ 0.3-17: bug fix: Example 6 fixed by Martin Maechler
+ 0.3-18: bug fix: non-finite or NA values of y still did not work, if highlight.3d=TRUE
+ 0.3-19: CITATION file and package vignette added
+ 0.3-20: NAMESPACE added, translation support for warnings/erorrs added, srcltx.sty added
+ 0.3-21: chicago.* added
+ 0.3-22: bugfix: retunred closures have to set par("usr") and par("mar") internally 
+          as the former call to scatterplot3d did!
+ 0.3-23: bugfix: must not reset mar in scatterplot3d!
+ 0.3-24: par("type") does no longer exist for R >= 2.3.0
+         x.prty, y.prty, z.prty are no longer removed in the s3d environment (user request)
+
+known UNfixed bug:
+ xlim, ylim, zlim don't work *exactly* for enlarged areas
