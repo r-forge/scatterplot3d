@@ -293,7 +293,7 @@ function(x, y = NULL, z = NULL, color = par("col"), pch = NULL,
         },
         plane3d = function(Intercept, x.coef = NULL, y.coef = NULL, 
             lty = "dashed", lty.box = NULL, ...){
-            if(!is.null(coef(Intercept))) Intercept <- coef(Intercept)
+            if(!is.atomic(Intercept) && !is.null(coef(Intercept))) Intercept <- coef(Intercept)
             if(is.null(lty.box)) lty.box <- lty
             if(is.null(x.coef) && length(Intercept) == 3){
                 x.coef <- Intercept[2]
