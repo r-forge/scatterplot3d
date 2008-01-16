@@ -104,8 +104,8 @@ scatterplot3d(x, y=NULL, z=NULL, color=par("col"), pch=NULL,
   only if needed as arguments in previous \code{par()} call.
 }
 \author{
-  Uwe Ligges \email{ligges@statistik.uni-dortmund.de};
-  \url{http://www.statistik.uni-dortmund.de/~ligges}.
+  Uwe Ligges \email{ligges@statistik.tu-dortmund.de};
+  \url{http://www.statistik.tu-dortmund.de/~ligges}.
 }
 \seealso{
   \code{\link[graphics]{persp}}, \code{\link[graphics]{plot}}, \code{\link[graphics]{par}}.

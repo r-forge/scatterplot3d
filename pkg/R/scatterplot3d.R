@@ -14,8 +14,8 @@ function(x, y = NULL, z = NULL, color = par("col"), pch = NULL,
      log = "", ...)
      # log not yet implemented
 {
-    ## Uwe Ligges <ligges@statistik.uni-dortmund.de>,
-    ## http://www.statistik.uni-dortmund.de/~ligges
+    ## Uwe Ligges <ligges@statistik.tu-dortmund.de>,
+    ## http://www.statistik.tu-dortmund.de/~ligges
     ##
     ## For MANY ideas and improvements thanks to Martin Maechler!!!
     ## Parts of the help files are stolen from the standard plotting functions in R.
