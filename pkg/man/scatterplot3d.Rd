@@ -17,7 +17,8 @@ scatterplot3d(x, y=NULL, z=NULL, color=par("col"), pch=NULL,
     cex.symbols=par("cex"), cex.axis=0.8 * par("cex.axis"),
     cex.lab=par("cex.lab"), font.axis=par("font.axis"),
     font.lab=par("font.lab"), lty.axis=par("lty"),
-    lty.grid=par("lty"), lty.hide=NULL, log="", ...)
+    lty.grid=par("lty"), lty.hide=NULL, lty.hplot=par("lty"),
+    log="", ...)
 }
 \arguments{
  \item{x}{the coordinates of points in the plot.}
