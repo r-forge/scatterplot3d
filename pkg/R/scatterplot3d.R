@@ -93,7 +93,7 @@ function(x, y = NULL, z = NULL, color = par("col"), pch = NULL,
         daty <- dat$y
         daty[!is.finite(daty)] <- mean(daty[is.finite(daty)])
         if(highlight.3d && !(all(diff(daty) == 0)))
-            dat$col <- rgb(seq(0, 1, length = n) * (y.range[2] - daty) / diff(y.range), g=0, b=0)
+            dat$col <- rgb(red=seq(0, 1, length = n) * (y.range[2] - daty) / diff(y.range), green=0, blue=0)
     }
 
 ### optim. axis scaling
