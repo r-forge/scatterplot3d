@@ -7,8 +7,8 @@
 \usage{
 scatterplot3d(x, y=NULL, z=NULL, color=par("col"), pch=NULL,
     main=NULL, sub=NULL, xlim=NULL, ylim=NULL, zlim=NULL,
-    xlab=NULL, ylab=NULL, zlab=NULL, scale.y=1, angle=40,
-    axis=TRUE, tick.marks=TRUE, label.tick.marks=TRUE,
+    xlab=NULL, ylab=NULL, zlab=NULL, scale.y=1, asp = NA, 
+    angle=40, axis=TRUE, tick.marks=TRUE, label.tick.marks=TRUE,
     x.ticklabs=NULL, y.ticklabs=NULL, z.ticklabs=NULL,
     y.margin.add=0, grid=TRUE, box=TRUE, lab=par("lab"),
     lab.z=mean(lab[1:2]), type="p", highlight.3d=FALSE,
@@ -33,6 +33,10 @@ scatterplot3d(x, y=NULL, z=NULL, color=par("col"), pch=NULL,
     may not work as exactly as expected (a known but unfixed bug).}
  \item{xlab, ylab, zlab}{titles for the x, y and z axis.}
  \item{scale.y}{scale of y axis related to x- and z axis.}
+ \item{asp}{Aspect ratio of plots. Numeric value sets the aspect ratio for 
+   projected z/x axes (argument \code{scale.y} sets the scaling of y axis). 
+   The default \code{NA} sets no fixed aspect ratio, but the graph fills 
+   the plotting area. 
  \item{angle}{angle between x and y axis (Attention: result depends on scaling).}
  \item{axis}{a logical value indicating whether axes should be drawn on the plot.}
  \item{tick.marks}{a logical value indicating whether tick marks should

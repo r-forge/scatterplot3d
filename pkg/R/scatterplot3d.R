@@ -1,8 +1,8 @@
 scatterplot3d <- 
 function(x, y = NULL, z = NULL, color = par("col"), pch = NULL,
      main = NULL, sub = NULL, xlim = NULL, ylim = NULL, zlim = NULL,
-     xlab = NULL, ylab = NULL, zlab = NULL, scale.y = 1, angle = 40,
-     axis = TRUE, tick.marks = TRUE, label.tick.marks = TRUE,
+     xlab = NULL, ylab = NULL, zlab = NULL, scale.y = 1, asp = NA,
+     angle = 40, axis = TRUE, tick.marks = TRUE, label.tick.marks = TRUE,
      x.ticklabs = NULL, y.ticklabs = NULL, z.ticklabs = NULL,
      y.margin.add = 0, grid = TRUE, box = TRUE, lab = par("lab"),
      lab.z = mean(lab[1:2]), type = "p", highlight.3d = FALSE,
@@ -22,6 +22,10 @@ function(x, y = NULL, z = NULL, color = par("col"), pch = NULL,
 
     mem.par <- par(mar = mar)
     x.scal <- y.scal <- z.scal <- 1
+    ## Perhaps only asp = 1 (fixed equal) or asp = NA (free) make
+    ## sense, but should we be so patronizing?
+    #if (!is.na(asp))
+    #    asp <- 1
     xlabel <- if (!missing(x)) deparse(substitute(x))
     ylabel <- if (!missing(y)) deparse(substitute(y))
     zlabel <- if (!missing(z)) deparse(substitute(z))
@@ -145,7 +149,7 @@ function(x, y = NULL, z = NULL, color = par("col"), pch = NULL,
     temp <- strwidth(format(rev(y.prty))[1], cex = cex.axis/par("cex"))
     if(angle.2) x1 <- x1 - temp - y.margin.add
     else        x2 <- x2 + temp + y.margin.add
-    plot.window(c(x1, x2), c(z.min, z.max + yz.f * y.max))
+    plot.window(c(x1, x2), c(z.min, z.max + yz.f * y.max), asp = asp)
     if(angle > 2) par("usr" = par("usr")[c(2, 1, 3:4)])
     usr <- par("usr") # we have to remind it for use in closures
     title(main, sub, ...)
