@@ -147,6 +147,7 @@ function(x, y = NULL, z = NULL, color = par("col"), pch = NULL,
     else        {x1 <- x.min; x2 <- x.max + yx.f * y.max}
     plot.window(c(x1, x2), c(z.min, z.max + yz.f * y.max), asp = asp)
     temp <- strwidth(format(rev(y.prty))[1], cex = cex.axis/par("cex"))
+    lheight = strheight("\n") - strheight("M")
     if(angle.2) x1 <- x1 - temp - y.margin.add
     else        x2 <- x2 + temp + y.margin.add
     plot.window(c(x1, x2), c(z.min, z.max + yz.f * y.max), asp = asp)
@@ -186,8 +187,8 @@ function(x, y = NULL, z = NULL, color = par("col"), pch = NULL,
 
             if(label.tick.marks) { ## label tick marks
                 las <- par("las")
-                mytext <- function(labels, side, at, ...)
-                    mtext(text = labels, side = side, at = at, line = -.5,
+                mytext <- function(labels, side, at, line = -0.5, ...)
+                    mtext(text = labels, side = side, at = at, line = line,
                           col=col.lab, cex=cex.axis, font=font.lab, ...)
                 ## X
                 if(is.null(x.ticklabs))
@@ -196,8 +197,16 @@ function(x, y = NULL, z = NULL, color = par("col"), pch = NULL,
                 ## Z
                 if(is.null(z.ticklabs))
                     z.ticklabs <- format(i.z * z.scal)
+                if (!is.na(asp)) {
+                    if (angle.1)
+                        linepad <- (x2 - usr[2])/lheight
+                    else
+                        linepad <- (usr[1] - x1)/lheight
+                } else {
+                    linepad = -0.5
+                }
                 mytext(z.ticklabs, side = if(angle.1) 4 else 2, at = i.z,
-                       adj = if(0 < las && las < 3) 1 else NA)
+                       adj = if(0 < las && las < 3) 1 else NA, line = linepad)
                 ## Y
                 temp <- if(angle > 2) rev(i.y) else i.y ## turn y-labels around
                 if(is.null(y.ticklabs))
@@ -222,10 +231,10 @@ function(x, y = NULL, z = NULL, color = par("col"), pch = NULL,
         ## Y
         lines(xx[1] + c(0, y.max * yx.f), c(z.min, y.max * yz.f + z.min),
               col = col.axis, lty = lty.axis)
-        mytext2(ylab, if(angle.1) 2 else 4, line= 0.5, at = z.min + y.max * yz.f)
+        mytext2(ylab, if(angle.1) 2 else 4, line = linepad + 1, at = z.min + y.max * yz.f)
         ## Z
         lines(xx[c(2,2)], c(z.min, z.max), col = col.axis, lty = lty.axis)
-        mytext2(zlab, if(angle.1) 4 else 2, line= 1.5, at = mean(z.range))
+        mytext2(zlab, if(angle.1) 4 else 2, line = linepad + 2, at = mean(z.range))
         if(box) {
             if(is.null(lty.hide)) lty.hide <- lty.axis
             ## X
