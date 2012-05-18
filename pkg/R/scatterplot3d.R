@@ -147,7 +147,9 @@ function(x, y = NULL, z = NULL, color = par("col"), pch = NULL,
     else        {x1 <- x.min; x2 <- x.max + yx.f * y.max}
     plot.window(c(x1, x2), c(z.min, z.max + yz.f * y.max), asp = asp)
     temp <- strwidth(format(rev(y.prty))[1], cex = cex.axis/par("cex"))
-    lheight = strheight("\n") - strheight("M")
+    ## lheight in usr units for numeric aspect is needed to locate
+    ## side 2 and 4 axis annotation with fixes aspect.
+    lheight = (strheight("\n") - strheight("M"))*asp
     if(angle.2) x1 <- x1 - temp - y.margin.add
     else        x2 <- x2 + temp + y.margin.add
     plot.window(c(x1, x2), c(z.min, z.max + yz.f * y.max), asp = asp)
