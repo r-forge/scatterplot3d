@@ -21,6 +21,7 @@ function(x, y = NULL, z = NULL, color = par("col"), pch = par("pch"),
     ## Parts of the help files are stolen from the standard plotting functions in R.
 
     mem.par <- par(mar = mar)
+    on.exit(par(mem.par))
     x.scal <- y.scal <- z.scal <- 1
     xlabel <- if (!missing(x)) deparse(substitute(x))
     ylabel <- if (!missing(y)) deparse(substitute(y))
@@ -278,7 +279,7 @@ function(x, y = NULL, z = NULL, color = par("col"), pch = par("pch"),
     ob <- ls() ## remove all unused objects from the result's enviroment:
     rm(list = ob[!ob %in% c("angle", "mar", "usr", "x.scal", "y.scal", "z.scal", "yx.f",
         "yz.f", "y.add", "z.min", "z.max", "x.min", "x.max", "y.max", 
-        "x.prty", "y.prty", "z.prty")])
+        "x.prty", "y.prty", "z.prty", "mem.par")])
     rm(ob)
     invisible(list(
         xyz.convert = function(x, y=NULL, z=NULL) {
