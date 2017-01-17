@@ -68,8 +68,8 @@ function(x, y = NULL, z = NULL, color = par("col"), pch = par("pch"),
         temp <- xlab;  xlab <- ylab;   ylab <- temp
         temp <- xlim;  xlim <- ylim;   ylim <- temp
     }
-    angle.1 <- (1 < angle && angle < 2) || angle > 3
-    angle.2 <- 1 <= angle && angle <= 3
+    angle.1 <- (1 < angle && angle <= 2) || angle > 3
+    angle.2 <- 1 < angle && angle <= 3
     dat <- data.frame(xyz[c("x","y","z")], col = color, pch = pch, bg = bg, stringsAsFactors = FALSE)
     ## xlim, ylim, zlim -- select the points inside the limits
     if(!is.null(xlim)) {
