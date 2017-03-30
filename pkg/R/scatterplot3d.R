@@ -146,7 +146,7 @@ function(x, y = NULL, z = NULL, color = par("col"), pch = par("pch"),
 
 ### init graphics
 
-### convert asp for plot
+### convert asp for plot (based on suggestions from Jari Oksanen)
     if(!is.na(asp)) {
         x.i <- x.min:x.max
         z.i <- z.min:z.max

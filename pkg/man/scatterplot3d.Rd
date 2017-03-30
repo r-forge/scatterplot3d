@@ -54,7 +54,9 @@ scatterplot3d(x, y=NULL, z=NULL, color=par("col"), pch=par("pch"),
    On some devices not all colors can be displayed. In this case try the
    postscript device or use \code{highlight.3d = FALSE}.}
  \item{mar}{A numerical vector of the form c(bottom, left, top, right)
-   which gives the lines of margin to be specified on the four sides of the plot.}
+   which gives the lines of margin to be specified on the four sides of the plot.
+   This \code{\link[graphics]{par}} setting is reverted to the previous setting on exit of the function.
+   For subsequent function calls affecting margins you should call \code{par(mar = ...)} with the same settings explicitly.}
  \item{bg}{background (fill) color for the open plot symbols given by pch = 21:25.}
  \item{col.axis, col.grid, col.lab}{the color to be used for axis / grid / axis labels.}
  \item{cex.symbols, cex.axis, cex.lab}{the magnification to be used for
@@ -117,8 +119,7 @@ scatterplot3d(x, y=NULL, z=NULL, color=par("col"), pch=par("pch"),
   \code{x.ticklabs=NULL}, \code{y.ticklabs=NULL}, \code{z.ticklabs=NULL} are not changed.
 }
 \author{
-  Uwe Ligges \email{ligges@statistik.tu-dortmund.de};
-  \url{http://www.statistik.tu-dortmund.de/~ligges}.
+  Uwe Ligges \email{ligges@statistik.tu-dortmund.de}, Martin Maechler, Sarah Schnackenberg
 }
 \seealso{
   \code{\link[graphics]{persp}}, \code{\link[graphics]{plot}}, \code{\link[graphics]{par}}.
