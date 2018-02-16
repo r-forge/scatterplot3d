@@ -252,7 +252,26 @@ function(x, y = NULL, z = NULL, color = par("col"), pch = par("pch"),
         }
 
         ## axis and labels
-
+        
+        ## determine position of labels
+        if(!is.na(asp)) {
+            if(angle.1) {
+                if(angle > 2) {
+                    linepad <- (x2 - usr[1])/lheight + 0.5
+                } else {
+                    linepad <- (x2 - usr[2])/lheight + 0.5
+                }
+            } else {
+                if(angle > 2) {
+                    linepad <- (usr[2] - x1)/lheight + 0.5
+                } else {
+                    linepad <- (usr[1] - x1)/lheight + 0.5
+                }
+            }
+        } else {
+            linepad = -0.5
+        }
+        
         ## determine position of labels
         if(!is.na(asp)) {
             if(angle.1) {
