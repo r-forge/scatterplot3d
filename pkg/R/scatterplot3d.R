@@ -106,7 +106,7 @@ function(x, y = NULL, z = NULL, color = par("col"), pch = par("pch"),
 ### optim. axis scaling
     p.lab <- par("lab")
     ## Y
-    y.range <- range(dat$y[is.finite(dat$y)], ylim)
+    y.range <- y.range.fix <- range(dat$y[is.finite(dat$y)], ylim)
     y.prty <- pretty(y.range, n = lab[2],
         min.n = max(1, min(.5 * lab[2], p.lab[2])))
     y.scal <- round(diff(y.prty[1:2]), digits = 12)
@@ -116,7 +116,7 @@ function(x, y = NULL, z = NULL, color = par("col"), pch = par("pch"),
     if(!is.null(ylim)) y.max <- max(y.max, ceiling((ylim[2] - y.add) / y.scal))
 #    if(angle > 2) dat$y <- y.max - dat$y  ## turn y-values around
     ## X
-    x.range <- range(dat$x[is.finite(dat$x)], xlim)
+    x.range <- x.range.fix <- range(dat$x[is.finite(dat$x)], xlim)
     x.prty <- pretty(x.range, n = lab[1],
         min.n = max(1, min(.5 * lab[1], p.lab[1])))
     x.scal <- round(diff(x.prty[1:2]), digits = 12)
@@ -338,7 +338,7 @@ function(x, y = NULL, z = NULL, color = par("col"), pch = par("pch"),
 ### Return Function Object
     ob <- ls() ## remove all unused objects from the result's enviroment:
     rm(list = ob[!ob %in% c("angle", "mar", "usr", "x.scal", "y.scal", "z.scal", "yx.f",
-        "yz.f", "y.add", "z.min", "z.max", "x.min", "x.max", "y.max", 
+        "yz.f", "y.add", "z.min", "z.max", "x.min", "x.max", "y.max", "x.range.fix", "y.range.fix",
         "x.prty", "y.prty", "z.prty", "mem.par")])
     rm(ob)
     invisible(list(
@@ -420,6 +420,52 @@ function(x, y = NULL, z = NULL, color = par("col"), pch = par("pch"),
             lines(c(x.min, x.min), c(z.min, z.max), ...)
             lines(c(x.min, x.max), c(z.min, z.min), ...)
         },
-        par.mar = mem.par
-    ))
+		contour3d = function(lmobject, x.count = 10, y.count = 10, type = "l", lty = "24", 
+			x.resolution = 50, y.resolution = 50, ...) {	
+			vars <- all.vars(formula(lmobject))
+			for(x1 in seq(x.range.fix[1], x.range.fix[2], length = x.count)){
+			    d <- data.frame(x1, seq(y.range.fix[1], y.range.fix[2], length = y.resolution))
+			    names(d) <- vars[-1]
+			    d[vars[1]] <- predict(lmobject, newdata=d)		
+	            xyz <- xyz.coords(d)
+	            if(angle > 2) { ## switch y and x axis to ensure righthand oriented coord.
+	                temp <- xyz$x; xyz$x <- xyz$y; xyz$y <- temp
+	            }
+	            y2 <- (xyz$y - y.add) / y.scal
+	            x <- xyz$x / x.scal + yx.f * y2
+	            y <- xyz$z / z.scal + yz.f * y2
+	            mem.par <- par(mar = mar, usr = usr)
+	            if(type == "h") {
+	                y2 <- z.min + yz.f * y2
+	                segments(x, y, x, y2, ...)
+	                points(x, y, type = "p", ...)
+	            }
+	            else points(x, y, type = type, lty = lty, ...)
+			}		
+			for(x2 in seq(y.range.fix[1], y.range.fix[2], length = y.count)){
+		    	d <- data.frame(seq(x.range.fix[1], x.range.fix[2], length = x.resolution), x2)
+		        names(d) <- vars[-1]
+			    d[vars[1]] <- predict(lmobject, newdata=d)		
+	            xyz <- xyz.coords(d)
+	            if(angle > 2) { ## switch y and x axis to ensure righthand oriented coord.
+	                temp <- xyz$x; xyz$x <- xyz$y; xyz$y <- temp
+	            }
+	            y2 <- (xyz$y - y.add) / y.scal
+	            x <- xyz$x / x.scal + yx.f * y2
+	            y <- xyz$z / z.scal + yz.f * y2
+	            mem.par <- par(mar = mar, usr = usr)
+	            if(type == "h") {
+	                y2 <- z.min + yz.f * y2
+	                segments(x, y, x, y2, ...)
+	                points(x, y, type = "p", ...)
+	            }
+	            else points(x, y, type = type, lty = lty, ...)
+			}
+		},
+		par.mar = mem.par
+	))
 }
+
+
+
+
