@@ -1,6 +1,6 @@
 Package: scatterplot3d
-Version: 0.3-41
-Date: 2018-02-13
+Version: 0.3-42
+Date: 2022-09-08
 Title: 3D Scatter Plot
 Author: Uwe Ligges <ligges@statistik.tu-dortmund.de>, Martin Maechler, Sarah Schnackenberg
 Maintainer: Uwe Ligges <ligges@statistik.tu-dortmund.de>
