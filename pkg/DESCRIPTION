@@ -7,4 +7,5 @@ Maintainer: Uwe Ligges <ligges@statistik.tu-dortmund.de>
 Description: Plots a three dimensional (3D) point cloud.
 Depends: R (>= 2.7.0)
 License: GPL-2
+Encoding: UTF-8
 Imports: grDevices, graphics, stats
